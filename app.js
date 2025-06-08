@@ -1,29 +1,37 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const ytdlp = require("yt-dlp-exec").raw("/opt/render/project/src/yt-dlp");
-
+const ytdlp = require("yt-dlp-exec");
 const path = require("path");
 const fs = require("fs");
+const { google } = require('googleapis');
 
 const app = express();
 app.use(express.static("public"));
-
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// YouTube Data API setup
+const youtube = google.youtube({
+  version: 'v3',
+  auth: 'AIzaSyBv0y1NT2R7fRVFY1zCZs2rKsFpfmBdDhk', // Replace with your API key
+});
+
+// Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
+// Video info & formats fetch
 app.post("/download", async (req, res) => {
   const videoURL = req.body.videoURL;
 
   try {
     const info = await ytdlp(videoURL, {
+      exec: "/opt/render/project/src/yt-dlp",
       dumpSingleJson: true,
       noWarnings: true,
       noCheckCertificate: true,
@@ -53,6 +61,7 @@ app.post("/download", async (req, res) => {
   }
 });
 
+// MP3 Download route
 app.get("/download-mp3", async (req, res) => {
   const videoURL = req.query.url;
 
@@ -68,15 +77,14 @@ app.get("/download-mp3", async (req, res) => {
   const outputTemplate = path.join(outputPath, `audio-%(title)s.%(ext)s`);
 
   try {
-    // Download and extract MP3
     await ytdlp(videoURL, {
+      exec: "/opt/render/project/src/yt-dlp",
       extractAudio: true,
       audioFormat: "mp3",
       audioQuality: "0",
       output: outputTemplate,
     });
 
-    // Find the downloaded MP3 file
     const files = fs.readdirSync(outputPath).filter(f => f.endsWith(".mp3"));
     if (!files.length) {
       throw new Error("MP3 file was not found after extraction.");
@@ -89,7 +97,7 @@ app.get("/download-mp3", async (req, res) => {
         console.error("Download error:", err);
         res.status(500).send("Error sending file.");
       } else {
-        fs.unlink(filePath, () => {}); // delete after sending
+        fs.unlink(filePath, () => {});
       }
     });
   } catch (error) {
@@ -97,11 +105,14 @@ app.get("/download-mp3", async (req, res) => {
     res.status(500).send("Failed to download MP3.");
   }
 });
+
+// Helper to extract video ID
 const extractVideoId = (url) => {
   const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
   const match = url.match(regex);
   return match ? match[1] : null;
 };
+
 // Feature Pages
 app.get("/mp3-features", (req, res) => {
   res.render("mp3-features");
@@ -110,7 +121,8 @@ app.get("/mp3-features", (req, res) => {
 app.get("/mp4-features", (req, res) => {
   res.render("mp4-features");
 });
-// GET: Show Thumbnail Downloader page
+
+// Thumbnail Downloader page
 app.get('/thumbnail-downloader', (req, res) => {
   res.render('thumbnail', {
     thumbnailUrls: [],
@@ -118,9 +130,7 @@ app.get('/thumbnail-downloader', (req, res) => {
   });
 });
 
-
-
-// POST route to process thumbnail request
+// Helper to get thumbnail URLs
 const getThumbnailUrls = (url) => {
   const videoIdMatch = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
   if (!videoIdMatch) return null;
@@ -134,7 +144,7 @@ const getThumbnailUrls = (url) => {
   ];
 };
 
-// POST: Handle thumbnail URL
+// Thumbnail URL POST handler
 app.post('/get-thumbnail', (req, res) => {
   const videoURL = req.body.videoURL;
   const thumbnailUrls = getThumbnailUrls(videoURL);
@@ -151,16 +161,13 @@ app.post('/get-thumbnail', (req, res) => {
     error: null
   });
 });
-const { google } = require('googleapis');
-const youtube = google.youtube({
-  version: 'v3',
-  auth: 'AIzaSyBv0y1NT2R7fRVFY1zCZs2rKsFpfmBdDhk', // Replace with your API key
-});
 
+// YouTube Channel Info page
 app.get('/channel-info', (req, res) => {
   res.render('channel-info', { channelData: null, error: null });
 });
 
+// YouTube Channel Info POST
 app.post('/channel-info', async (req, res) => {
   const channelUrl = req.body.channelUrl;
   const channelId = await extractChannelId(channelUrl);
@@ -197,12 +204,13 @@ app.post('/channel-info', async (req, res) => {
   }
 });
 
+// Helper to extract channel ID from URL
 async function extractChannelId(url) {
-  // For full channel ID
+  // Full channel ID
   const idMatch = url.match(/(channel\/)(UC[0-9A-Za-z-_]{21}[AQgw])/);
   if (idMatch) return idMatch[2];
 
-  // For @handle
+  // @handle
   const handleMatch = url.match(/youtube\.com\/@([a-zA-Z0-9-_]+)/);
   if (handleMatch) {
     const username = handleMatch[1];
@@ -217,7 +225,7 @@ async function extractChannelId(url) {
     return channel?.id?.channelId || null;
   }
 
-  // YouTube user/ or custom URLs (approx fallback)
+  // user/custom URLs fallback
   const userMatch = url.match(/youtube\.com\/(user|c)\/([a-zA-Z0-9-_]+)/);
   if (userMatch) {
     const username = userMatch[2];
@@ -234,6 +242,8 @@ async function extractChannelId(url) {
 
   return null;
 }
+
+// Static pages
 app.get('/terms', (req, res) => {
   res.render('terms');
 });
@@ -246,7 +256,7 @@ app.get('/privacy', (req, res) => {
   res.render('privacy');
 });
 
-
+// Start server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
