@@ -1,4 +1,6 @@
 
+const path = require("path");
+const ytDlpPath = path.join(__dirname, "yt-dlp");
 const express = require("express");
 const bodyParser = require("body-parser");
 const ytdlp = require("yt-dlp-exec");
