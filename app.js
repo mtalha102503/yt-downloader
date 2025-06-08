@@ -7,7 +7,7 @@ const fs = require("fs");
 
 const app = express();
 app.use(express.static("public"));
-const PORT = 3000;
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -246,6 +246,11 @@ app.get('/privacy', (req, res) => {
 });
 
 
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
