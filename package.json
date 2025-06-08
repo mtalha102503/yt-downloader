@@ -4,7 +4,6 @@
   "description": "A YouTube downloader and channel info analyzer tool",
   "main": "app.js",
  "scripts": {
-  "start": "node app.js",
   "postinstall": "curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o yt-dlp && chmod +x yt-dlp"
 },
   "dependencies": {
