@@ -1,7 +1,8 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const ytdlp = require("yt-dlp-exec");
+const ytdlp = require("yt-dlp-exec").raw("/opt/render/project/src/yt-dlp");
+
 const path = require("path");
 const fs = require("fs");
 
