@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <title>YouTube Thumbnail Downloader - YT1D</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+  <div class="nav-left">
+    <a href="/">YTDrop</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/mp3-features">YouTube to MP3</a>
+    <a href="/mp4-features">YouTube to MP4</a>
+    <a href="/thumbnail-downloader">Thumbnail Downloader</a>
+    <a href="/channel-info">Channel Info</a>
+
+  </div>
+</div>
+
+  <div class="container">
+    <h1>YouTube Thumbnail Downloader</h1>
+    <form action="/get-thumbnail" method="POST">
+      <input type="text" name="videoURL" placeholder="Enter YouTube video URL" required>
+      <button type="submit">Get Thumbnail</button>
+    </form>
+
+    <% if (thumbnailUrls && thumbnailUrls.length > 0) { %>
+      <div class="thumbnails">
+        <% thumbnailUrls.forEach(url => { %>
+          <div class="thumbnail-item">
+            <img src="<%= url %>" alt="Thumbnail" style="max-width: 100%; border-radius: 8px;">
+            <a href="<%= url %>" download class="download-btn">Download</a>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <% if (typeof error !== 'undefined') { %>
+      <p style="color:red;"><%= error %></p>
+    <% } %>
+
+    <section class="info-section">
+      <h2>What is a YouTube Thumbnail Downloader?</h2>
+      <p>
+        Viewers often judge a YouTube video by its thumbnail. If the thumbnail doesn't catch their eye, they'll skip the video.
+        That's why having a YouTube Thumbnail Downloader is essential. YT1D is the best YouTube thumbnail downloader online for free
+        and allows you to easily download and get high-quality thumbnail images including full HD, 1080P, 4K, 8K.
+      </p>
+      <p>
+        Download YouTube video and Shorts video thumbnails instantly. To get started, simply copy the link of the video,
+        paste it in the search bar above, click 'Download', choose a size, and download your image. Just enter the video URL,
+        and our YouTube thumbnail downloader will fetch the thumbnails for you.
+      </p>
+    </section>
+
+    <section class="features">
+      <h2>YouTube Thumbnail Downloader Features</h2>
+      <div class="feature-grid">
+        <div class="feature-item">✅ User-friendly — Anyone can use it easily.</div>
+        <div class="feature-item">📸 High-quality downloads — Up to 8K resolution.</div>
+        <div class="feature-item">💸 Free Access Forever — No cost, ever.</div>
+        <div class="feature-item">📱 All Devices Supported — PC, Mac, Android, iOS.</div>
+        <div class="feature-item">🔐 No Sign-up Required — Fully private.</div>
+        <div class="feature-item">⚡ Fast Download — Thumbnails in seconds.</div>
+      </div>
+    </section>
+
+    <section class="instructions">
+      <h2>How to download YouTube thumbnails?</h2>
+      <ul>
+        <li>📋 Add YouTube Video Link — Copy the YouTube video link.</li>
+        <li>🔄 Auto-Generate — Thumbnails appear automatically.</li>
+        <li>⬇️ Click the thumbnail download button — Choose your preferred quality.</li>
+      </ul>
+    </section>
+  </div>
+  <%- include('partials/footer') %>
+</body>
+</html>

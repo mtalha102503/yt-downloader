@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <meta charset="UTF-8">
+  <title>YouTube Channel Info Analyzer</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+      background: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      animation: fadeInUp 0.8s ease-in-out;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff0000;
+      margin-bottom: 10px;
+    }
+
+    .sub {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 70%;
+      border: 1px solid #ccc;
+      border-radius: 10px 0 0 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #ff0000;
+      border: none;
+      color: white;
+      border-radius: 0 10px 10px 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #cc0000;
+    }
+
+    .info {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .info img {
+      border-radius: 50%;
+      width: 120px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      font-size: 1.1rem;
+      color: #333;
+      text-align: left;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+  <div class="nav-left">
+    <a href="/">YTDrop</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/mp3-features">YouTube to MP3</a>
+    <a href="/mp4-features">YouTube to MP4</a>
+    <a href="/thumbnail-downloader">Thumbnail Downloader</a>
+    <a href="/channel-info">Channel Info</a>
+
+  </div>
+</div>
+
+  <div class="container">
+    <h1>YouTube Channel Info Analyzer</h1>
+    <p class="sub">Analyze any YouTube channel details instantly using our free tool.</p>
+
+    <form method="POST" action="/channel-info">
+      <input type="text" name="channelUrl" placeholder="Enter YouTube channel URL" required>
+      <button type="submit">Get Info</button>
+    </form>
+
+    <section>
+      <h2 style="text-align:center;">Features</h2>
+      <ul>
+        <li>✅ Fetch channel title, thumbnail, and description.</li>
+        <li>✅ Real-time subscriber count.</li>
+        <li>✅ Video count and total views.</li>
+        <li>✅ Mobile-friendly and fast.</li>
+        <li>✅ Works with both channel URL and custom URL.</li>
+        <li>✅ Free and unlimited usage.</li>
+      </ul>
+    </section>
+
+    <% if (channelData) { %>
+      <div class="info">
+        <img src="<%= channelData.thumbnail %>" alt="Channel Thumbnail">
+        <ul>
+          <li><strong>Channel Title:</strong> <%= channelData.title %></li>
+          <li><strong>Subscribers:</strong> <%= channelData.subscriberCount ? channelData.subscriberCount.toLocaleString() : 'N/A' %></li>
+<li><strong>Total Videos:</strong> <%= channelData.videoCount ? channelData.videoCount.toLocaleString() : 'N/A' %></li>
+<li><strong>Total Views:</strong> <%= channelData.viewCount ? channelData.viewCount.toLocaleString() : 'N/A' %></li>
+          <li><strong>Description:</strong> <%= channelData.description || "No description provided." %></li>
+        </ul>
+      </div>
+    <% } %>
+  </div>
+   <%- include('partials/footer') %>
+</body>
+</html>
+

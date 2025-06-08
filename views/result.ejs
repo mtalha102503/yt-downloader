@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %> - Download</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1><%= title %></h1>
+    <img src="<%= thumbnail %>" alt="Thumbnail" style="max-width:100%; border-radius: 10px;">
+    <h2>Download Options</h2>
+    <ul style="list-style: none; padding: 0;">
+      <% formats.forEach(format => { %>
+        <li><a href="<%= format.url %>" class="download-btn" target="_blank">📹 Download <%= format.quality %> MP4</a></li>
+      <% }) %>
+      <% if (audioUrl) { %>
+        <li>
+          <a href="/download-mp3?url=<%= encodeURIComponent(videoURL) %>" class="download-btn" target="_blank">
+            🎵 Download Audio (MP3)
+          </a>
+        </li>
+      <% } %>
+    </ul>
+    <p><a href="/" style="color:#3498db;">Download another video</a></p>
+  </div>
+  <div id="spinner" class="spinner-overlay" style="display: none;">
+  <div class="spinner"></div>
+</div>
+<script>
+  const links = document.querySelectorAll('.download-btn');
+  const spinner = document.getElementById('spinner');
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      spinner.style.display = 'flex';
+
+      setTimeout(() => {
+        spinner.style.display = 'none'; // fallback if download fails
+      }, 10000);
+    });
+  });
+</script>
+</body>
+</html>

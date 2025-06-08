@@ -1,0 +1,17 @@
+<h2>Channel Info Analyzer</h2>
+<form action="/channel-info" method="get">
+  <input type="text" name="id" placeholder="Enter YouTube Channel ID">
+  <button type="submit">Analyze</button>
+</form>
+
+<% if (error) { %>
+  <p style="color:red;"><%= error %></p>
+<% } %>
+
+<% if (data) { %>
+  <h3><%= data.snippet.title %></h3>
+  <p><strong>Subscribers:</strong> <%= data.statistics.subscriberCount %></p>
+  <p><strong>Views:</strong> <%= data.statistics.viewCount %></p>
+  <p><strong>Videos:</strong> <%= data.statistics.videoCount %></p>
+  <p><strong>Description:</strong> <%= data.snippet.description %></p>
+<% } %>

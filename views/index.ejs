@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+ <link rel="icon" type="image/png" href="/favicon.ico">
+  <meta charset="UTF-8" />
+  <title>YouTube Downloader</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      color: #e74c3c;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    form {
+      margin: 30px 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px;
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #c0392b;
+    }
+
+    ul {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+    <div class="navbar">
+  <div class="nav-left">
+    <a href="/">YTDrop</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/mp3-features">YouTube to MP3</a>
+    <a href="/mp4-features">YouTube to MP4</a>
+    <a href="/thumbnail-downloader">Thumbnail Downloader</a>
+    <a href="/channel-info">Channel Info</a>
+
+  </div>
+</div>
+
+  <div class="container">
+    <h1>YouTube Video Downloader</h1>
+
+    <!-- Download form moved here -->
+    <form action="/download" method="POST">
+      <input type="text" name="videoURL" placeholder="Enter YouTube video URL" required />
+      <button type="submit">Download</button>
+    </form>
+
+    <p>
+      YouTube is the world’s largest video-sharing platform, hosting millions of videos across every topic imaginable — music, education, entertainment, news, and more. 
+      However, YouTube does not allow users to directly download videos or audio in most cases.
+    </p>
+
+    <h2>About Our Tool</h2>
+    <p>
+      Our YouTube Downloader tool allows you to easily grab your favorite videos and audio from YouTube with just a link. Whether you're trying to save a video offline or extract a song in MP3 format — we’ve got you covered!
+    </p>
+
+    <h2>Features</h2>
+    <ul>
+      <li>🎥 Download YouTube videos in MP4 format</li>
+      <li>🎵 Convert and download audio in MP3 format</li>
+      <li>⚡ Fast and secure server-side processing</li>
+      <li>🖼️ Automatically shows video title and thumbnail</li>
+      <li>📱 Works on desktop, tablet, and mobile</li>
+    </ul>
+  </div>
+  <section class="features">
+  <h2>Features of YTDrop</h2>
+  <div class="features-row">
+    <div class="feature-item">
+      <img src="/icons/format-video-svgrepo-com.svg" alt="Format Icon" class="feature-icon" />
+      <h3>Versatility in Format</h3>
+      <p>Download YouTube videos to MP3, MP4, WEBM, and audio-less video files, catering to diverse needs such as music production, offline viewing, and professional editing.</p>
+    </div>
+    <div class="feature-item">
+      <img src="/icons/hd-svgrepo-com.svg" alt="Quality Icon" class="feature-icon" />
+      <h3>High Quality Options</h3>
+      <p>Download YouTube videos, Shorts, and music tracks in high quality, including full HD, 1080p, 4k, and even 8k.</p>
+    </div>
+    <div class="feature-item">
+      <img src="/icons/circled-svgrepo-com.svg" alt="Free Icon" class="feature-icon" />
+      <h3>Absolutely Free</h3>
+      <p>Enjoy unlimited YouTube video and Shorts downloads without spending a dime. YTDrop is committed to providing a safe and cost-free service for all users.</p>
+    </div>
+  </div>
+
+  <div class="features-row">
+    <div class="feature-item">
+      <img src="/icons/download-speed-svgrepo-com.svg" alt="Speed Icon" class="feature-icon" />
+      <h3>Fast Downloads</h3>
+      <p>YTDrop offers a fast YouTube video downloading experience. Tasks are completed within seconds, providing you with high-speed downloads.</p>
+    </div>
+    <div class="feature-item">
+      <img src="/icons/privacy-dashboard-svgrepo-com.svg" alt="Privacy Icon" class="feature-icon" />
+      <h3>No Sign-up Required</h3>
+      <p>Our safe YouTube downloader prioritizes your privacy and ease of access. No login required, and we do not store personal information.</p>
+    </div>
+    <div class="feature-item">
+      <img src="/icons/multi-platform-svgrepo-com.svg" alt="Platform Icon" class="feature-icon" />
+      <h3>Cross-Platform Compatibility</h3>
+      <p>Download YouTube videos instantly on Mac, Android, and Windows devices via any web browser (Chrome/Safari) with no client installation required.</p>
+    </div>
+  </div>
+</section>
+<section class="intro-section">
+  <h2>The Best Free Online YouTube Downloader</h2>
+  <p>
+    Our YouTube downloader is easy to use! Easily download YouTube videos, Shorts, and music.
+    Just visit our website - <strong>yt1d.com</strong> on your device and start enjoying free content now!
+  </p>
+</section>
+
+<section class="how-to-section">
+  <h2>How to Download YouTube Videos Online via YT1D</h2>
+  <ul>
+    <li>📋 Copy the YouTube link of the video and paste it into the input line.</li>
+    <li>🔽 Click <strong>"Download"</strong> and wait for the video to be ready.</li>
+    <li>✅ Select the desired download options and click <strong>"Download"</strong>.</li>
+  </ul>
+</section>
+<%- include('partials/footer') %>
+</body>
+</html>

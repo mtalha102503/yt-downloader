@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <title>Convert YouTube to MP3 - YTDrop</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+  <div class="nav-left">
+    <a href="/">YTDrop</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/mp3-features">YouTube to MP3</a>
+    <a href="/mp4-features">YouTube to MP4</a>
+    <a href="/thumbnail-downloader">Thumbnail Downloader</a>
+    <a href="/channel-info">Channel Info</a>
+
+  </div>
+</div>
+
+  <div class="container">
+    <h1>YouTube to MP3 Converter</h1>
+
+    <!-- Download Input -->
+    <form action="/download" method="POST" class="download-form">
+      <input type="text" name="videoURL" placeholder="Paste YouTube video URL" required>
+      <button type="submit">Download MP3</button>
+    </form>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+      <h2>🎧 How to Download MP3 from YouTube</h2>
+      <ol>
+        <li>Copy the YouTube video URL you want to convert.</li>
+        <li>Paste the link into the input box above.</li>
+        <li>Click the “Download MP3” button.</li>
+        <li>Wait for conversion and download your audio file!</li>
+      </ol>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <h2>💡 Features of Our YouTube to MP3 Converter</h2>
+      <ul>
+        <li>🎵 High-quality MP3 audio up to 320kbps</li>
+        <li>⚡ Lightning-fast conversion speeds</li>
+        <li>📱 Works on all devices (mobile, tablet, PC)</li>
+        <li>🎧 Supports playlists and long videos</li>
+        <li>🔒 No login or registration needed</li>
+        <li>✅ Clean interface and ad-free experience</li>
+      </ul>
+    </section>
+
+    <a href="/" class="download-btn">⬅ Back to Home</a>
+  </div>
+  <%- include('partials/footer') %>
+</body>
+</html>
