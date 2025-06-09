@@ -1,4 +1,4 @@
-
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ytdlp = require("yt-dlp-exec");
@@ -153,7 +153,7 @@ app.post('/get-thumbnail', (req, res) => {
 const { google } = require('googleapis');
 const youtube = google.youtube({
   version: 'v3',
-  auth: 'AIzaSyBv0y1NT2R7fRVFY1zCZs2rKsFpfmBdDhk', // Replace with your API key
+  auth: process.env.YOUTUBE_API_KEY, // Replace with your API key
 });
 
 app.get('/channel-info', (req, res) => {
@@ -244,7 +244,7 @@ app.get('/copyright', (req, res) => {
 app.get('/privacy', (req, res) => {
   res.render('privacy');
 });
-
+ console.log("Loaded API Key:", process.env.YOUTUBE_API_KEY);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

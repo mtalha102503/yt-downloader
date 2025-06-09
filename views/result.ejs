@@ -1,9 +1,45 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title><%= title %> - Download</title>
   <link rel="stylesheet" href="/style.css">
+  <style>
+    .download-btn {
+      display: inline-block;
+      padding: 10px 16px;
+      margin: 6px 0;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .download-btn:hover {
+      background-color: #c0392b;
+    }
+    .spinner-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #e74c3c;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -12,11 +48,11 @@
     <h2>Download Options</h2>
     <ul style="list-style: none; padding: 0;">
       <% formats.forEach(format => { %>
-        <li><a href="<%= format.url %>" class="download-btn" target="_blank">📹 Download <%= format.quality %> MP4</a></li>
+        <li><a href="<%= format.url %>" class="download-btn" target="_blank" rel="noopener noreferrer">📹 Download <%= format.quality %> MP4</a></li>
       <% }) %>
       <% if (audioUrl) { %>
         <li>
-          <a href="/download-mp3?url=<%= encodeURIComponent(videoURL) %>" class="download-btn" target="_blank">
+          <a href="/download-mp3?url=<%= encodeURIComponent(videoURL) %>" class="download-btn" target="_blank" rel="noopener noreferrer">
             🎵 Download Audio (MP3)
           </a>
         </li>
@@ -24,9 +60,11 @@
     </ul>
     <p><a href="/" style="color:#3498db;">Download another video</a></p>
   </div>
+
   <div id="spinner" class="spinner-overlay" style="display: none;">
-  <div class="spinner"></div>
-</div>
+    <div class="spinner"></div>
+  </div>
+
 <script>
   const links = document.querySelectorAll('.download-btn');
   const spinner = document.getElementById('spinner');
@@ -34,10 +72,9 @@
   links.forEach(link => {
     link.addEventListener('click', () => {
       spinner.style.display = 'flex';
-
-      setTimeout(() => {
-        spinner.style.display = 'none'; // fallback if download fails
-      }, 10000);
+      window.addEventListener('beforeunload', () => {
+        spinner.style.display = 'none';
+      });
     });
   });
 </script>
