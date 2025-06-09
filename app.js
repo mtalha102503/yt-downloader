@@ -244,7 +244,7 @@ app.get('/copyright', (req, res) => {
 app.get('/privacy', (req, res) => {
   res.render('privacy');
 });
- console.log("Loaded API Key:", process.env.YOUTUBE_API_KEY);
+console.log("Loaded API Key:", process.env.YOUTUBE_API_KEY);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
