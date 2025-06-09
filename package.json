@@ -4,7 +4,7 @@
   "description": "A YouTube downloader and channel info analyzer tool",
   "main": "app.js",
   "scripts": {
-    "build": "your-build-command-here",
+    "build": "webpack --config webpack.config.js",
     "postinstall": "curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe -o yt-dlp.exe"
   },
   "dependencies": {
