@@ -4,6 +4,7 @@
   "description": "A YouTube downloader and channel info analyzer tool",
   "main": "app.js",
   "scripts": {
+    "build": "your-build-command-here",
     "postinstall": "curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe -o yt-dlp.exe"
   },
   "dependencies": {
@@ -12,6 +13,8 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "googleapis": "^105.0.0",
-    "yt-dlp-exec": "^1.0.2"
+    "youtube-dl-exec": "^3.0.22",
+    "yt-dlp-exec": "^1.0.2",
+    "ytdl-core": "^4.11.5"
   }
 }

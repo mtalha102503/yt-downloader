@@ -1,4 +1,8 @@
 require("dotenv").config();
+const youtubedl = require('youtube-dl-exec');
+youtubedl('https://www.youtube.com/watch?v=VIDEO_ID')
+  .then(output => console.log(output))
+  .catch(error => console.error(error));
 const express = require("express");
 const bodyParser = require("body-parser");
 const ytdlp = require("yt-dlp-exec");
@@ -244,7 +248,7 @@ app.get('/copyright', (req, res) => {
 app.get('/privacy', (req, res) => {
   res.render('privacy');
 });
- console.log("Loaded API Key:", process.env.YOUTUBE_API_KEY);
+console.log("Loaded API Key:", process.env.YOUTUBE_API_KEY);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
