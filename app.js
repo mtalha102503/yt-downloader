@@ -1,8 +1,4 @@
-require("dotenv").config();
-const youtubedl = require('youtube-dl-exec');
-youtubedl('https://www.youtube.com/watch?v=VIDEO_ID')
-  .then(output => console.log(output))
-  .catch(error => console.error(error));
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const ytdlp = require("yt-dlp-exec");
